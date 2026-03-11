@@ -1,3 +1,4 @@
+import GlobalRegistry from "@/services/GlobalRegistry";
 import { UserId } from "@/types/Common";
 import { v4 as uuidv4 } from "uuid";
 export default class User {
@@ -16,6 +17,8 @@ export default class User {
   }
 
   static create(userFullname: string, userAccountId: string[]) {
-    return new User(userFullname, userAccountId);
+    const user = new User(userFullname, userAccountId);
+    GlobalRegistry.registerUser(user);
+    return user;
   }
 }
